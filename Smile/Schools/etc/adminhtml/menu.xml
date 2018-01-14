@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smile_Schools::school_head" title="Schools" module="Smile_Schools" sortOrder="100" resource="Smile_Schools::school_head" />
+        <add id="Smile_Schools::level" title="Level" module="Smile_Schools" sortOrder="10" parent="Smile_Schools::school_head" action="schools/level" resource="Smile_Schools::school" />
+        <add id="Smile_Schools::school" title="Schools" module="Smile_Schools" sortOrder="20" parent="Smile_Schools::school_head" action="schools/school" resource="Smile_Schools::school" />
+    </menu>
+</config>

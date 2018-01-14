@@ -1,0 +1,66 @@
+<?php
+/** @var $block \Smile\Blog\Block\Post */
+/** @var $post \Smile\Blog\Model\Post */
+
+$post = $block->getPost();
+?>
+<h1 class="blog-post-item-title"><?php echo $post->getTitle() ?></h1>
+
+<div class="blog-post-item-image">
+    <img src="/m2/pub/media/<?= $post->getImage() ?>" alt="" />
+</div>
+<div class="blog-post-item-content">
+    <?php echo $post->getContent(); ?>
+</div>
+<div class="blog-post-item-created">
+    <strong><?php echo __('Created at:') ?></strong> <?php echo $post->getCreated(); ?>
+</div>
+<div class="blog-post-item-updated">
+    <strong><?php echo __('Updated at:') ?></strong>  <?php echo $post->getUpdated(); ?>
+</div><br/>
+<div class="blog-coment-list">
+    <?php /** @var $post \Smile\Blog\Model\Coment */ ?>
+    <?php foreach ($block->getComent()->getByPostId($post->getId()) as $coment): ?>
+        <div class="blog-coment-item-user">
+            <?php echo $coment->getUser(); ?>
+        </div>
+        <div class="blog-coment-item-text">
+            <p><?php echo $coment->getText(); ?></p>
+        </div>
+        <div class="blog-post-item-created">
+            <strong><?php echo __('Created at:') ?></strong> <?php echo $coment->getCreated(); ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<form class="form coment"
+      action="<?= $block->escapeUrl($block->getFormAction()) ?>"
+      method="post"
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+      data-mage-init='{"validation":{}}'>
+    <fieldset class="fieldset">
+        <legend class="legend"><span><?= $block->escapeHtml(__('Coment')) ?></span></legend><br />
+        <div class="field name required">
+            <label class="label" for="name"><span><?= $block->escapeHtml(__('User Name')) ?></span></label>
+            <div class="control">
+                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('User Name')) ?>" value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('name') ?: $this->helper('Magento\Contact\Helper\Data')->getUserName()) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+
+        <div class="field comment required">
+            <label class="label" for="comment"><span><?= $block->escapeHtml(__('What’s on your mind?')) ?></span></label>
+            <div class="control">
+                <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('What’s on your mind?')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($this->helper('Magento\Contact\Helper\Data')->getPostValue('comment')) ?></textarea>
+            </div>
+        </div>
+        <?= $block->getChildHtml('form.additional.info') ?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value="" />
+            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
+                <span><?= $block->escapeHtml(__('Submit')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>

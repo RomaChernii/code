@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smile_Products::products" title="Products" module="Smile_Products" sortOrder="100" resource="Smile_Products::products" />
+        <add id="Smile_Products::categories" title="Categories" module="Smile_Products" sortOrder="10" parent="Smile_Products::products" action="products/categories" resource="Smile_Products::products" />
+        <add id="Smile_Products::number" title="Quantity " module="Smile_Products" sortOrder="20" parent="Smile_Products::products" action="products/quantity" resource="Smile_Products::products" />
+        <add id="Smile_Products::smile" title="Smile" translate="title" module="Smile_Products" parent="Magento_Backend::content" sortOrder="50" dependsOnModule="Smile_Products" resource="Smile_Products::smile"/>
+        <add id="Smile_Products::smile_helloworld" title="Hello World" translate="title" module="Smile_Products" parent="Smile_Products::smile" sortOrder="10" dependsOnModule="Smile_Products" action="products/helloworld" resource="Smile_Products::smile"/>
+    </menu>
+</config>

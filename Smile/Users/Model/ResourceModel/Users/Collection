@@ -1,0 +1,28 @@
+<?php
+
+namespace Smile\Users\Model\ResourceModel\Users;
+
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+
+class Collection extends AbstractCollection
+{
+    protected $_idFieldName = 'user_id';
+    protected $_eventPrefix = 'smile_users_log_collection';
+    protected $_eventObject = 'log_collection';
+
+    protected function _construct()
+    {
+        $this->_init('Smile\Users\Model\Users', 'Smile\Users\Model\ResourceModel\Users');
+    }
+    public function getSelectCountSql()
+    {
+        $countSelect = parent::getSelectCountSql();
+        $countSelect->reset(\Zend_Db_Select::GROUP);
+        return $countSelect;
+    }
+
+    protected function _toOptionArray($valueField = 'user_id', $labelField = 'log', $additional = [])
+    {
+        return parent::_toOptionArray($valueField, $labelField, $additional);
+    }
+}

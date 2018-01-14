@@ -1,0 +1,19 @@
+<?php /** @var $block \Smile\Blog\Block\CategoryList */ ?>
+<h1><?php echo __('Blog Category') ?></h1>
+<ul class="blog-category-list">
+    <?php /** @var $post \Smile\Blog\Model\Category */ ?>
+    <?php foreach ($block->getCategories() as $category): ?>
+        <li class="blog-category-list-item">
+            <h3 class="blog-category-item-title">
+                <a href="/m2/blog/posts?id=<?=$category->getId()?>"><?php echo $category->getTitle() ?></a>
+            </h3>
+            <div class="blog-category-item-image">
+                <img src="/m2/pub/media/<?= $category->getImage() ?>" alt="" />
+            </div>
+            <div class="blog-category-item-description">
+                <?php echo $category->getDescription(); ?>
+            </div>
+
+        </li>
+    <?php endforeach; ?>
+</ul>

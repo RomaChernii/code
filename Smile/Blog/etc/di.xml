@@ -1,0 +1,122 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Smile\Blog\Api\PostRepositoryInterface" type="Smile\Blog\Model\PostRepository" />
+    <preference for="Smile\Blog\Api\Data\PostSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smile\Blog\Api\Data\PostInterface" type="Smile\Blog\Model\Post" />
+
+    <preference for="Smile\Blog\Api\PostCategoryRepositoryInterface" type="Smile\Blog\Model\PostCategoryRepository" />
+    <preference for="Smile\Blog\Api\Data\PostCategorySearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smile\Blog\Api\Data\PostCategoryInterface" type="Smile\Blog\Model\PostCategory" />
+
+    <preference for="Smile\Blog\Api\CategoryRepositoryInterface" type="Smile\Blog\Model\CategoryRepository" />
+    <preference for="Smile\Blog\Api\Data\CategorySearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smile\Blog\Api\Data\CategoryInterface" type="Smile\Blog\Model\Category" />
+
+    <preference for="Smile\Blog\Api\ComentRepositoryInterface" type="Smile\Blog\Model\ComentRepository" />
+    <preference for="Smile\Blog\Api\Data\ComentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smile\Blog\Api\Data\ComentInterface" type="Smile\Blog\Model\Coment" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_post_listing_data_source" xsi:type="string">Smile\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Smile\Blog\Model\ResourceModel\Post\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smile_post</argument>
+            <argument name="eventPrefix" xsi:type="string">blog_post_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">post_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Smile\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_category_listing_data_source" xsi:type="string">Smile\Blog\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Smile\Blog\Model\ResourceModel\Category\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smile_category</argument>
+            <argument name="eventPrefix" xsi:type="string">blog_category_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">category_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Smile\Blog\Model\ResourceModel\Category</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_coment_listing_data_source" xsi:type="string">Smile\Blog\Model\ResourceModel\Coment\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Smile\Blog\Model\ResourceModel\Coment\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smile_coment</argument>
+            <argument name="eventPrefix" xsi:type="string">blog_coment_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">coment_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Smile\Blog\Model\ResourceModel\Coment</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="BlogGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Smile\Blog\CategoryImageUpload" type="Smile\Blog\Model\Category\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">blog/tmp/category</argument>
+            <argument name="basePath" xsi:type="string">blog/category</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Smile\Blog\Controller\Adminhtml\Category\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Smile\Blog\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Smile\Blog\PostImageUpload" type="Smile\Blog\Model\Post\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">blog/tmp/post</argument>
+            <argument name="basePath" xsi:type="string">blog/post</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Smile\Blog\Controller\Adminhtml\Post\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Smile\Blog\PostImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Smile\Blog\Controller\Adminhtml\Post\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Smile\Blog\PostImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Smile\Blog\Controller\Adminhtml\Category\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Smile\Blog\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+
+</config>

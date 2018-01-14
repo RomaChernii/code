@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smile_AdvancedRouting::smile" title="Smile" module="Smile_AdvancedRouting" sortOrder="100" resource="Smile_AdvancedRouting::smile" />
+        <add id="Smile_AdvancedRouting::school" title="School" module="Smile_AdvancedRouting" sortOrder="10" parent="Smile_AdvancedRouting::smile" action="advancedrouting/school" resource="Smile_AdvancedRouting::smile" />
+        <add id="Smile_AdvancedRouting::job" title="Job" module="Smile_AdvancedRouting" sortOrder="20" parent="Smile_AdvancedRouting::smile" action="advancedrouting/job" resource="Smile_AdvancedRouting::smile" />
+    </menu>
+</config>

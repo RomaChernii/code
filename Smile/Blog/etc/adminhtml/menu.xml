@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!-- create new admin menu ( left panel ) item -->
+        <add id="Smile_Blog::blog_menu"
+             title="Blog"
+             module="Smile_Blog"
+             sortOrder="100"
+             resource="Smile_Blog::blog_menu" />
+
+        <add id="Smile_Blog::blog"
+             title="Blog"
+             translate="title"
+             sortOrder="10"
+             module="Smile_Blog"
+             parent="Smile_Blog::blog_menu"
+             resource="Smile_Blog::blog_menu"/>
+
+        <add id="Smile_Blog::categories"
+             title="Categories"
+             module="Smile_Blog"
+             sortOrder="10"
+             parent="Smile_Blog::blog"
+             action="blog/category"
+             resource="Smile_Blog::blog_menu" />
+
+        <add id="Smile_Blog::posts"
+             title="Posts"
+             translate="title"
+             sortOrder="20"
+             module="Smile_Blog"
+             parent="Smile_Blog::blog"
+             action="blog/post"
+             dependsOnModule="Smile_Blog"
+             resource="Smile_Blog::blog_menu"/>
+
+        <add id="Smile_Blog::coments"
+             title="Coments"
+             translate="title"
+             sortOrder="20"
+             module="Smile_Blog"
+             parent="Smile_Blog::blog"
+             action="blog/coment"
+             dependsOnModule="Smile_Blog"
+             resource="Smile_Blog::blog_menu"/>
+
+    </menu>
+</config>
